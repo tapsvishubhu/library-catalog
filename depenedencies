@@ -1,0 +1,6 @@
+"cookie-parser": "~1.4.6", /* parse cookie header and populate cookie */
+    "debug": "~4.3.4", /* core debugging technique */
+    "express": "^4.19.2", /* server framework */
+    "http-errors": "~2.0.0", /* error handlig */
+    "morgan": "~1.10.0", /* http request logger */
+    "pug": "^3.0.2"  /* template view */
