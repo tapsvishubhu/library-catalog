@@ -43,11 +43,11 @@ exports.genre_create_get = (req, res, next) => {
 exports.genre_create_post = [
   // Validate and sanitize the name field.
   body("name", "Genre name must contain at least 3 characters")
-    .trim()
-    .isLength({ min: 3 })
-    .escape(),
+    .trim() // remove trailing and leading whitespaces
+    .isLength({ min: 3 }) // check minimum length
+    .escape(), //remove html character
 
-  // Process request after validation and sanitization.
+  //Process request after validation and sanitization.
   asyncHandler(async (req, res, next) => {
     // Extract the validation errors from a request.
     const errors = validationResult(req);
