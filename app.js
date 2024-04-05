@@ -3,13 +3,12 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const compression = require("compression");
+const helmet = require("helmet");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const catalogRouter = require("./routes/catalog"); // Import routes for "catalog" area of site
-
-const compression = require("compression");
-const helmet = require("helmet");
 
 const app = express();
 
@@ -26,7 +25,7 @@ app.use(limiter);
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 
-const dev_db_url = "MongoDB_server_url";
+const dev_db_url = "mongodb://localhost:27017/";
 
 const mongoDB = process.env.MONGODB_URI || dev_db_url;
 
@@ -35,7 +34,11 @@ async function main() {
   await mongoose.connect(mongoDB);
 }
 
-// view engine setup
+/* 
+    view engine setup
+      1. set path to views folder
+      2. setup pug as view engine
+*/
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
@@ -75,5 +78,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
+
+console.log("http://localhost:3000");
 
 module.exports = app;
